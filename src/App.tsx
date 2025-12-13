@@ -37,6 +37,8 @@ export default function App() {
 
   const handleOpen = () => {
     setIsOpen(true);
+    // Trigger autoplay after splash screen opens (user interaction)
+    window.dispatchEvent(new CustomEvent("splashOpened"));
   };
 
   const handleStartOpening = () => {
