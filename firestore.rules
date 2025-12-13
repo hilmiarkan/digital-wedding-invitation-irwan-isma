@@ -1,0 +1,25 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Guestbook collection: anyone can read, but only write (no delete/update)
+    match /guestbook/{commentId} {
+      allow read: if true; // Anyone can read comments
+      allow create: if request.resource.data.keys().hasAll(['name', 'attendance', 'message', 'createdAt'])
+        && request.resource.data.name is string
+        && request.resource.data.attendance in ['hadir', 'tidak']
+        && request.resource.data.message is string
+        && request.resource.data.name.size() > 0
+        && request.resource.data.message.size() > 0
+        && request.resource.data.name.size() <= 100
+        && request.resource.data.message.size() <= 500;
+      allow update, delete: if false; // No updates or deletes allowed
+    }
+
+    // Temporary rule for other collections (remove after testing)
+    match /{document=**} {
+      allow read, write: if request.time < timestamp.date(2026, 1, 6);
+    }
+  }
+}
