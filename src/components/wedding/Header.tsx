@@ -2,11 +2,12 @@
 import { motion } from "motion/react";
 import { ChevronDown } from "lucide-react";
 import FlowerDecoration2 from "./FlowerDecoration2";
+import gunungan from "../../media/gunungan.png";
 
 export function Header() {
   return (
     <section className="relative h-screen w-full overflow-hidden bg-stone-100 flex items-center justify-center">
-      <FlowerDecoration2 className="z-[15]" />
+      
       {/* Parallax Background Image - Mount Bromo Scenery */}
       <motion.div 
         className="absolute inset-0 z-0"
@@ -14,12 +15,13 @@ export function Header() {
         animate={{ scale: 1 }}
         transition={{ duration: 10, repeat: Infinity, repeatType: "reverse" }}
       >
-        <div className="absolute inset-0 bg-stone-900/30 z-10 mix-blend-multiply" />
+        <div className="absolute inset-0 bg-stone-900/30 z-15 mix-blend-multiply" />
         <img 
           src="https://images.unsplash.com/photo-1722661671972-89e5e2fb532a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080" 
           alt="Javanese Scenery" 
           className="h-full w-full object-cover object-center"
         />
+        <FlowerDecoration2 className="z-[15]" />
       </motion.div>
 
       {/* Decorative Overlay Pattern (Batik Motif subtle) */}
@@ -35,9 +37,7 @@ export function Header() {
             className="w-16 h-16 mx-auto mb-4 opacity-80"
         >
              {/* Simple Gunungan-like SVG Shape */}
-             <svg viewBox="0 0 100 100" fill="currentColor" className="text-amber-100 drop-shadow-md">
-                <path d="M50 0 C20 40 10 60 10 100 L90 100 C90 60 80 40 50 0 Z" />
-             </svg>
+             <img src={gunungan} alt="Gunungan" className="w-16" />
         </motion.div>
 
         <motion.p 

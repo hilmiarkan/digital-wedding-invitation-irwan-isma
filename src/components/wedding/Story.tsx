@@ -1,7 +1,7 @@
 
 import { motion } from "motion/react";
 import { Heart } from "lucide-react";
-import { FlowerDecoration } from "./FlowerDecoration";
+import FlowerDecoration2 from "./FlowerDecoration2";
 
 export function Story() {
   const stories = [
@@ -44,7 +44,7 @@ export function Story() {
 
   return (
     <section className="py-24 px-4 bg-white overflow-hidden relative">
-      <FlowerDecoration />
+      <FlowerDecoration2 className="z-[5]" />
       <div className="max-w-2xl mx-auto">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}

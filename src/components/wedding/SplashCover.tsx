@@ -2,6 +2,7 @@
 import { motion } from "motion/react";
 import { MailOpen, Flower } from "lucide-react";
 import { useState } from "react";
+import gunungan from "../../media/gunungan.png";
 
 interface SplashCoverProps {
   guestName: string;
@@ -75,7 +76,7 @@ export function SplashCover({ guestName, onOpen, onStartOpening }: SplashCoverPr
             {/* Top Ornamental Icon */}
             <div className="flex justify-center mb-6">
                 <div className="text-amber-600 opacity-60">
-                    <Flower size={32} />
+                    <img src={gunungan} alt="Gunungan" className="w-12" />
                 </div>
             </div>
 

@@ -1,4 +1,5 @@
 import { motion } from "motion/react";
+import type { CSSProperties } from "react";
 
 // import semua layer
 import layer1 from '../../media/flowey/1.png';
@@ -34,14 +35,17 @@ export default function FlowerDecoration2({ className }: FlowerDecoration2Props)
   ];
 
   // Component untuk render layered flower di satu corner
-  const FlowerLayered = ({ transformClass }: { transformClass?: string }) => (
-    <div className={`relative w-full h-full isolate ${transformClass ?? ""}`}>
+  const FlowerLayered = ({ transformClass, transformStyle }: { transformClass?: string; transformStyle?: CSSProperties }) => (
+    <div className={`relative w-full h-full isolate ${transformClass ?? ""}`} style={transformStyle}>
       {layers.map((layer, index) => (
         <motion.img
           key={index}
           src={layer.src}
           alt={`flower layer ${index + 1}`}
           className="absolute inset-0 w-full h-full object-cover"
+          style={{
+            filter: 'drop-shadow(0 4px 6px rgba(0, 0, 0, 0.15)) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1))',
+          }}
           initial={{ opacity: 0 }}
           animate={{
             opacity: 1,
@@ -86,46 +90,47 @@ export default function FlowerDecoration2({ className }: FlowerDecoration2Props)
     </div>
   );
 
-  // Extract opacity from className if provided, otherwise default to opacity-60
+  // Extract opacity from className if provided, otherwise default to 100% (fully visible)
   const opacityMatch = className?.match(/opacity-(\d+)/);
-  // const opacityValue = opacityMatch ? opacityMatch[1] : '60';
-  const opacityValue = 1;
-
-  const opacityClass = `opacity-${opacityValue}`;
+  const opacityValue = opacityMatch ? parseInt(opacityMatch[1]) : 100;
+  
+  // Use inline style for opacity to ensure it works correctly
+  const opacityStyle = { opacity: opacityValue / 100 };
+  // Remove opacity class and keep other classes (like z-index)
   const otherClasses = className?.replace(/opacity-\d+/g, '').trim() || '';
 
   return (
     <div className={`absolute inset-0 pointer-events-none overflow-hidden ${otherClasses}`}>
       {/* Top Left - flip horizontal */}
       <motion.div 
-        className={`absolute -top-12 -left-12 w-64 h-64 md:w-80 md:h-80 ${opacityClass}`}
-        style={{ originX: 0, originY: 0 }}
+        className="absolute -top-12 -left-12 w-64 h-64 md:w-80 md:h-80"
+        style={{ originX: 0, originY: 0, ...opacityStyle }}
       >
-        <FlowerLayered transformClass="scale-x-[-1]" />
+        <FlowerLayered transformStyle={{ transform: 'scaleX(-1)' }} />
       </motion.div>
 
       {/* Top Right - normal */}
       <motion.div 
-        className={`absolute -top-6 -right-12 w-64 h-64 md:w-80 md:h-200 ${opacityClass}`}
-        style={{ originX: 1, originY: 0 }}
+        className="absolute -top-6 -right-12 w-64 h-64 md:w-80 md:h-200"
+        style={{ originX: 1, originY: 0, ...opacityStyle }}
       >
         <FlowerLayered />
       </motion.div>
 
-      {/* Bottom Left - flip horizontal + vertical */}
+      {/* Bottom Left - flip horizontal and vertical */}
       <motion.div 
-        className={`absolute -bottom-12 -left-12 w-64 h-64 md:w-80 md:h-80 ${opacityClass}`}
-        style={{ originX: 0, originY: 1 }}
+        className="absolute -bottom-12 -left-12 w-64 h-64 md:w-80 md:h-80"
+        style={{ originX: 0, originY: 1, ...opacityStyle }}
       >
-        <FlowerLayered transformClass="scale-[-1]" />
+        <FlowerLayered transformStyle={{ transform: 'scaleX(-1) scaleY(-1)' }} />
       </motion.div>
 
       {/* Bottom Right - flip vertical */}
       <motion.div 
-        className={`absolute -bottom-12 -right-12 w-64 h-64 md:w-80 md:h-80 ${opacityClass}`}
-        style={{ originX: 1, originY: 1 }}
+        className="absolute -bottom-12 -right-12 w-64 h-64 md:w-80 md:h-80"
+        style={{ originX: 1, originY: 1, ...opacityStyle }}
       >
-        <FlowerLayered transformClass="scale-y-[-1]" />
+        <FlowerLayered transformStyle={{ transform: 'scaleY(-1)' }} />
       </motion.div>
     </div>
   );

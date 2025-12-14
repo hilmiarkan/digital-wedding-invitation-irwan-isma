@@ -10,6 +10,7 @@ import {
 } from "../../firebase/guestbook";
 import { formatRelativeTime } from "../../utils/time";
 import { slugToName } from "../../utils/slug";
+import { FlowerDecoration } from "./FlowerDecoration";
 
 interface GuestbookProps {
   slug?: string;
@@ -79,6 +80,7 @@ export function Guestbook({ slug, isInvitedGuest = false }: GuestbookProps) {
 
   return (
     <section className="py-24 px-4 bg-stone-100">
+      <FlowerDecoration />
       <div className="max-w-3xl mx-auto">
         <div className="text-center mb-12">
           <h2 className="font-serif text-3xl text-stone-800">RSVP & Ucapan</h2>

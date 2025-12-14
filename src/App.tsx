@@ -12,6 +12,7 @@ import {
   Story, 
   Gifts, 
   Guestbook, 
+  Instagram,
   Footer 
 } from "./components/wedding";
 import { Toaster } from "sonner";
@@ -76,6 +77,7 @@ export default function App() {
         <EventDetails />
         <Story />
         <Gifts />
+        <Instagram />
         <Guestbook slug={slug} isInvitedGuest={isInvitedGuest} />
         <Footer />
         <FloatingMusic />
