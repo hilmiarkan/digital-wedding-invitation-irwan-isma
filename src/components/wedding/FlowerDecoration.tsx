@@ -1,6 +1,6 @@
 
 import { motion } from "motion/react";
-import batik from '../../media/batik.png'; // Path relative to the current JS/TS file
+import batik from '../../media/batik.webp'; // Path relative to the current JS/TS file
 
 
 export function FlowerDecoration() {

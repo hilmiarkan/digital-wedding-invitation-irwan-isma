@@ -2,7 +2,7 @@
 import { motion } from "motion/react";
 import { ChevronDown } from "lucide-react";
 import FlowerDecoration2 from "./FlowerDecoration2";
-import gunungan from "../../media/gunungan.png";
+import gunungan from "../../media/gunungan.webp";
 
 export function Header() {
   return (
@@ -27,7 +27,7 @@ export function Header() {
       </motion.div>
 
       {/* Decorative Overlay Pattern (Batik Motif subtle) */}
-      <div className="absolute inset-0 z-10 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/batik.png')]" />
+      <div className="absolute inset-0 z-10 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/batik.webp')]" />
 
       {/* Content */}
       <div className="relative z-20 text-center text-white space-y-6 px-4">

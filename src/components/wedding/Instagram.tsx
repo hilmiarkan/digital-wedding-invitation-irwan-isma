@@ -1,7 +1,7 @@
 import { motion } from "motion/react";
 import { Instagram as InstagramIcon } from "lucide-react";
 import { FlowerDecoration } from "./FlowerDecoration";
-import gunungan from '../../media/gunungan.png';
+import gunungan from '../../media/gunungan.webp';
 
 export function Instagram() {
   return (

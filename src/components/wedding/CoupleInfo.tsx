@@ -2,7 +2,7 @@
 import { motion } from "motion/react";
 import { FlowerDecoration } from "./FlowerDecoration";
 import FlowerDecoration2 from "./FlowerDecoration2";
-import gunungan from '../../media/gunungan.png';
+import gunungan from '../../media/gunungan.webp';
 
 export function CoupleInfo() {
   return (

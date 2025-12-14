@@ -2,7 +2,7 @@
 import { motion } from "motion/react";
 import { MailOpen, Flower } from "lucide-react";
 import { useState } from "react";
-import gunungan from "../../media/gunungan.png";
+import gunungan from "../../media/gunungan.webp";
 
 interface SplashCoverProps {
   guestName: string;

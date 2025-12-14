@@ -2,7 +2,7 @@
 import { motion } from "motion/react";
 import { MapPin, Clock, Calendar } from "lucide-react";
 import { FlowerDecoration } from "./FlowerDecoration";
-import gunungan from '../../media/gunungan.png';
+import gunungan from '../../media/gunungan.webp';
 
 export function EventDetails() {
   return (

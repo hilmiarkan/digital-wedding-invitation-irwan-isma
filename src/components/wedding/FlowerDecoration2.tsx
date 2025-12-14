@@ -3,17 +3,17 @@ import { memo, useMemo } from "react";
 import type { CSSProperties } from "react";
 
 // import semua layer
-import layer1 from '../../media/flowey/1.png';
-import layer2 from '../../media/flowey/2.png';
-import layer3 from '../../media/flowey/3.png';
-import layer4 from '../../media/flowey/4.png';
-import layer5 from '../../media/flowey/5.png';
-import layer6 from '../../media/flowey/6.png';
-import layer7 from '../../media/flowey/7.png';
-import layer8 from '../../media/flowey/8.png';
-import layer9 from '../../media/flowey/9.png';
-import layer10 from '../../media/flowey/10.png';
-import layer11 from '../../media/flowey/11.png';
+import layer1 from '../../media/flowey/1.webp';
+import layer2 from '../../media/flowey/2.webp';
+import layer3 from '../../media/flowey/3.webp';
+import layer4 from '../../media/flowey/4.webp';
+import layer5 from '../../media/flowey/5.webp';
+import layer6 from '../../media/flowey/6.webp';
+import layer7 from '../../media/flowey/7.webp';
+import layer8 from '../../media/flowey/8.webp';
+import layer9 from '../../media/flowey/9.webp';
+import layer10 from '../../media/flowey/10.webp';
+import layer11 from '../../media/flowey/11.webp';
 
 type FlowerDecoration2Props = {
   className?: string;
