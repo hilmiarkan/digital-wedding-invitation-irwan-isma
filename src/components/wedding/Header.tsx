@@ -1,10 +1,12 @@
 
 import { motion } from "motion/react";
 import { ChevronDown } from "lucide-react";
+import FlowerDecoration2 from "./FlowerDecoration2";
 
 export function Header() {
   return (
     <section className="relative h-screen w-full overflow-hidden bg-stone-100 flex items-center justify-center">
+      <FlowerDecoration2 className="z-[15]" />
       {/* Parallax Background Image - Mount Bromo Scenery */}
       <motion.div 
         className="absolute inset-0 z-0"
@@ -29,7 +31,7 @@ export function Header() {
         <motion.div 
             initial={{ y: -50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 1 }}
+            transition={{ duration: 1.5 }}
             className="w-16 h-16 mx-auto mb-4 opacity-80"
         >
              {/* Simple Gunungan-like SVG Shape */}
@@ -41,7 +43,7 @@ export function Header() {
         <motion.p 
           initial={{ y: -20, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 1.2 }}
           className="text-sm tracking-[0.3em] uppercase font-medium drop-shadow-md text-amber-50"
         >
           Pernikahan
@@ -50,16 +52,16 @@ export function Header() {
         <motion.h1 
           initial={{ scale: 0.9, opacity: 0 }}
           whileInView={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          transition={{ duration: 1.5, delay: 0.2 }}
           className="font-serif text-5xl md:text-7xl lg:text-8xl drop-shadow-lg"
         >
-          Isma <br /> <span className="text-3xl md:text-5xl font-sans font-light">dan</span> Irwansyah
+          Isma <br /> <span className="text-3xl md:text-5xl font-sans font-light">&</span> Irwansyah
         </motion.h1>
 
         <motion.div 
           initial={{ y: 20, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
+          transition={{ duration: 1.2, delay: 0.4 }}
           className="flex items-center justify-center gap-4 text-sm md:text-base font-light tracking-wide drop-shadow-md opacity-90"
         >
           <span className="w-12 h-px bg-white/60" />

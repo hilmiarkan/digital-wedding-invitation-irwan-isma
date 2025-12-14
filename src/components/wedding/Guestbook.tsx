@@ -9,6 +9,7 @@ import {
   type GuestbookComment 
 } from "../../firebase/guestbook";
 import { formatRelativeTime } from "../../utils/time";
+import { slugToName } from "../../utils/slug";
 
 interface GuestbookProps {
   slug?: string;
@@ -19,7 +20,21 @@ export function Guestbook({ slug, isInvitedGuest = false }: GuestbookProps) {
   const [comments, setComments] = useState<GuestbookComment[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [form, setForm] = useState({ name: "", attendance: "hadir" as "hadir" | "tidak", message: "" });
+  
+  // Get guest name from slug automatically
+  const guestName = slug ? slugToName(slug) : "";
+  const [form, setForm] = useState({ 
+    name: guestName, 
+    attendance: "hadir" as "hadir" | "tidak", 
+    message: "" 
+  });
+
+  // Update form name when slug changes
+  useEffect(() => {
+    if (slug) {
+      setForm(prev => ({ ...prev, name: slugToName(slug) }));
+    }
+  }, [slug]);
 
   // Subscribe to real-time comments
   useEffect(() => {
@@ -34,7 +49,12 @@ export function Guestbook({ slug, isInvitedGuest = false }: GuestbookProps) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.name.trim() || !form.message.trim()) {
-      toast.error("Mohon isi nama dan ucapan");
+      toast.error("Mohon isi ucapan");
+      return;
+    }
+    
+    if (!slug) {
+      toast.error("Terjadi kesalahan. Silakan refresh halaman.");
       return;
     }
 
@@ -84,10 +104,12 @@ export function Guestbook({ slug, isInvitedGuest = false }: GuestbookProps) {
                 <input 
                   type="text" 
                   value={form.name}
-                  onChange={e => setForm({...form, name: e.target.value})}
-                  className="w-full px-4 py-2 rounded-lg border border-stone-200 focus:outline-none focus:ring-2 focus:ring-amber-200 transition"
-                  placeholder="Masukkan nama Anda"
+                  readOnly
+                  disabled
+                  className="w-full px-4 py-2 rounded-lg border border-stone-200 bg-stone-50 text-stone-600 cursor-not-allowed"
+                  placeholder="Nama akan terisi otomatis"
                 />
+                <p className="text-xs text-stone-500">Nama diisi otomatis berdasarkan undangan Anda</p>
               </div>
 
               <div className="space-y-2">
