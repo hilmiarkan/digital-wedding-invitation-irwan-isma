@@ -10,3 +10,4 @@ export * from "./Guestbook";
 export * from "./Instagram";
 export * from "./Footer";
 export * from "./FloatingMusic";
+export * from "./Divider";

@@ -4,7 +4,9 @@ import { FlowerDecoration } from "./FlowerDecoration";
 
 export function Footer() {
   return (
-    <footer className="py-20 bg-stone-900 text-white text-center px-4 relative overflow-hidden">
+    <footer className="py-20 bg-stone-900 text-white text-center px-4 relative overflow-hidden -mt-[1px]" style={{
+      boxShadow: 'inset 0 80px 100px -50px rgba(0, 0, 0, 0.5)'
+    }}>
       <FlowerDecoration />
       <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5" />
       
@@ -21,7 +23,7 @@ export function Footer() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1.2, delay: 0.2 }}
                 viewport={{ once: true }}
-                className="font-serif text-2xl text-amber-100"
+                className="font-handwriting-elegant text-2xl text-amber-100"
             >
                 Kami Yang Berbahagia
             </motion.h3>
@@ -55,7 +57,7 @@ export function Footer() {
                     whileInView={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 1.2, delay: 0.5 }}
                     viewport={{ once: true }}
-                    className="font-serif text-4xl md:text-5xl mb-4"
+                    className="font-handwriting-elegant text-4xl md:text-5xl mb-4"
                  >
                     Isma & Irwansyah
                  </motion.h2>
@@ -86,7 +88,7 @@ export function Footer() {
         </div>
 
         <div className="pt-8 text-[10px] text-stone-600">
-            <p>Dibuat dengan ☕ oleh arknmaulana</p>
+            <p>Dibuat dengan ☕ oleh @arknmaulana</p>
         </div>
       </motion.div>
     </footer>

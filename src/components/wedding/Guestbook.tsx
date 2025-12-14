@@ -79,8 +79,9 @@ export function Guestbook({ slug, isInvitedGuest = false }: GuestbookProps) {
   };
 
   return (
-    <section className="py-24 px-4 bg-stone-100">
-      <FlowerDecoration />
+    <section className="py-24 px-4 bg-wood-soft relative overflow-hidden -mt-[1px]" style={{
+      boxShadow: 'inset 0 80px 100px -50px rgba(0, 0, 0, 0.35), inset 0 -80px 100px -50px rgba(0, 0, 0, 0.35)'
+    }}>
       <div className="max-w-3xl mx-auto">
         <div className="text-center mb-12">
           <h2 className="font-serif text-3xl text-stone-800">RSVP & Ucapan</h2>

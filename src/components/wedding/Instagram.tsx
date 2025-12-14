@@ -1,12 +1,16 @@
 import { motion } from "motion/react";
 import { Instagram as InstagramIcon } from "lucide-react";
 import { FlowerDecoration } from "./FlowerDecoration";
+import gunungan from '../../media/gunungan.png';
 
 export function Instagram() {
   return (
-    <section className="py-20 px-4 bg-stone-100 overflow-hidden relative">
+    <section className="py-20 px-4 bg-wood-soft overflow-hidden relative -mt-[1px]" style={{
+      boxShadow: 'inset 0 80px 100px -50px rgba(0, 0, 0, 0.35), inset 0 -80px 100px -50px rgba(0, 0, 0, 0.35)'
+    }}>
       <FlowerDecoration />
       <div className="max-w-4xl mx-auto relative z-10">
+        <img src={gunungan} alt="Gunungan" className="w-16 mx-auto" />
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

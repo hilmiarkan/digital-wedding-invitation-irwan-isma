@@ -13,7 +13,8 @@ import {
   Gifts, 
   Guestbook, 
   Instagram,
-  Footer 
+  Footer,
+  Divider
 } from "./components/wedding";
 import { Toaster } from "sonner";
 import { slugToName, isValidGuestSlug } from "./utils/slug";
@@ -47,7 +48,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen font-sans bg-stone-50 text-stone-800 selection:bg-amber-200">
+    <div className="min-h-screen font-sans bg-wood-light text-stone-800 selection:bg-amber-200">
       <Toaster position="bottom-center" />
       
       {/* 
@@ -72,13 +73,21 @@ export default function App() {
       {/* Main content is always rendered now, sitting behind the z-index 50 SplashCover */}
       <main className="relative z-0">
         <Header />
+        <Divider />
         <Countdown />
+        <Divider />
         <CoupleInfo />
+        <Divider />
         <EventDetails />
+        <Divider />
         <Story />
+        <Divider />
         <Gifts />
+        <Divider />
         <Instagram />
+        <Divider />
         <Guestbook slug={slug} isInvitedGuest={isInvitedGuest} />
+        <Divider />
         <Footer />
         <FloatingMusic />
       </main>

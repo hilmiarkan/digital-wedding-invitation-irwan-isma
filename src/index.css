@@ -68,6 +68,9 @@
     --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    --font-handwriting: "Dancing Script", "Great Vibes", "Kalam", "Caveat", "Satisfy", cursive;
+    --font-handwriting-elegant: "Great Vibes", "Dancing Script", cursive;
+    --font-handwriting-casual: "Kalam", "Caveat", cursive;
     --color-red-100: oklch(.936 .032 17.717);
     --color-red-700: oklch(.505 .213 27.518);
     --color-amber-50: oklch(.987 .022 95.277);
@@ -2141,4 +2144,140 @@ html {
   50% {
     opacity: .5;
   }
+}
+
+/* Handwriting Font Classes */
+.font-handwriting {
+  font-family: var(--font-handwriting);
+}
+
+.font-handwriting-elegant {
+  font-family: var(--font-handwriting-elegant);
+}
+
+.font-handwriting-casual {
+  font-family: var(--font-handwriting-casual);
+}
+
+/* Skeuomorphic Styles */
+.skeuomorphic-card {
+  background: linear-gradient(145deg, #ffffff, #f5f5f5);
+  box-shadow: 
+    20px 20px 60px rgba(0, 0, 0, 0.15),
+    -20px -20px 60px rgba(255, 255, 255, 0.8),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.9),
+    inset 0 2px 4px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.skeuomorphic-card-raised {
+  background: linear-gradient(145deg, #ffffff, #f8f8f8);
+  box-shadow: 
+    25px 25px 70px rgba(0, 0, 0, 0.2),
+    -25px -25px 70px rgba(255, 255, 255, 0.9),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.95),
+    inset 0 3px 6px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.skeuomorphic-button {
+  background: linear-gradient(145deg, #1f2937, #111827);
+  box-shadow: 
+    8px 8px 16px rgba(0, 0, 0, 0.4),
+    -4px -4px 8px rgba(255, 255, 255, 0.1),
+    inset 0 2px 4px rgba(0, 0, 0, 0.3),
+    inset 0 -2px 4px rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.skeuomorphic-button:hover {
+  box-shadow: 
+    6px 6px 12px rgba(0, 0, 0, 0.3),
+    -2px -2px 6px rgba(255, 255, 255, 0.08),
+    inset 0 1px 2px rgba(0, 0, 0, 0.2),
+    inset 0 -1px 2px rgba(255, 255, 255, 0.08);
+  transform: translateY(1px);
+}
+
+.skeuomorphic-text-embossed {
+  text-shadow: 
+    0 1px 0 rgba(255, 255, 255, 0.8),
+    0 2px 2px rgba(0, 0, 0, 0.1),
+    0 3px 3px rgba(0, 0, 0, 0.05);
+}
+
+.skeuomorphic-text-engraved {
+  text-shadow: 
+    0 -1px 0 rgba(0, 0, 0, 0.2),
+    0 1px 0 rgba(255, 255, 255, 0.6),
+    inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.skeuomorphic-paper {
+  background: 
+    linear-gradient(145deg, #fefefe, #f5f5f0),
+    url('https://www.transparenttextures.com/patterns/cream-paper.png');
+  background-blend-mode: overlay;
+  box-shadow: 
+    15px 15px 50px rgba(0, 0, 0, 0.12),
+    -15px -15px 50px rgba(255, 255, 255, 0.7),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.9),
+    inset 0 2px 4px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.skeuomorphic-paper-raised {
+  background: 
+    linear-gradient(145deg, #ffffff, #f8f8f3),
+    url('https://www.transparenttextures.com/patterns/cream-paper.png');
+  background-blend-mode: overlay;
+  box-shadow: 
+    20px 20px 60px rgba(0, 0, 0, 0.15),
+    -20px -20px 60px rgba(255, 255, 255, 0.8),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.95),
+    inset 0 3px 6px rgba(0, 0, 0, 0.05),
+    0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  transform: translateY(-3px);
+}
+
+.skeuomorphic-gold {
+  background: linear-gradient(145deg, #f59e0b, #d97706);
+  box-shadow: 
+    8px 8px 16px rgba(217, 119, 6, 0.4),
+    -4px -4px 8px rgba(245, 158, 11, 0.3),
+    inset 0 2px 4px rgba(255, 255, 255, 0.3),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(217, 119, 6, 0.3);
+}
+
+.skeuomorphic-gold-text {
+  background: linear-gradient(135deg, #f59e0b, #d97706, #b45309);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 
+    0 2px 4px rgba(217, 119, 6, 0.3),
+    0 1px 0 rgba(255, 255, 255, 0.5);
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.1));
+}
+
+/* Wood Texture Background */
+.bg-wood-light {
+  background: 
+    linear-gradient(135deg, rgba(252, 250, 247, 0.88), rgba(248, 245, 240, 0.92)),
+    url('https://www.transparenttextures.com/patterns/wood-pattern.png');
+  background-blend-mode: overlay;
+  background-size: 600px 600px;
+  background-attachment: fixed;
+}
+
+.bg-wood-soft {
+  background: 
+    linear-gradient(135deg, rgba(253, 251, 248, 0.85), rgba(250, 247, 242, 0.90)),
+    url('https://www.transparenttextures.com/patterns/light-wood.png');
+  background-blend-mode: overlay;
+  background-size: 700px 700px;
+  background-attachment: fixed;
 }

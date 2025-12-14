@@ -29,7 +29,9 @@ export function Gifts() {
   };
 
   return (
-    <section className="py-24 px-4 bg-white relative overflow-hidden">
+    <section className="py-24 px-4 bg-wood-light relative overflow-hidden -mt-[1px]" style={{
+      boxShadow: 'inset 0 80px 100px -50px rgba(0, 0, 0, 0.35), inset 0 -80px 100px -50px rgba(0, 0, 0, 0.35)'
+    }}>
       <FlowerDecoration />
       <div className="max-w-3xl mx-auto text-center">
         <motion.div
@@ -39,7 +41,7 @@ export function Gifts() {
             viewport={{ once: true }}
             className="mb-12 space-y-4"
         >
-            <h2 className="font-serif text-3xl text-stone-800">Amplop Digital & Hadiah</h2>
+            <h2 className="font-handwriting-elegant text-3xl text-stone-800">Amplop Digital & Hadiah</h2>
             <p className="text-stone-500 max-w-lg mx-auto">
                 Doa restu Anda merupakan karunia yang sangat berarti bagi kami. 
                 Dan jika memberi adalah ungkapan tanda kasih Anda, Anda dapat memberi kado secara cashless.

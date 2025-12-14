@@ -3,6 +3,7 @@ import { motion } from "motion/react";
 import { useEffect, useState } from "react";
 import { Calendar } from "lucide-react";
 import { FlowerDecoration } from "./FlowerDecoration";
+import FlowerDecoration2 from "./FlowerDecoration2";
 
 export function Countdown() {
   const targetDate = new Date("2025-12-27T13:00:00"); 
@@ -75,7 +76,9 @@ END:VCALENDAR`;
   };
 
   return (
-    <section className="py-20 px-6 bg-stone-50 text-center relative overflow-hidden">
+    <section className="py-20 px-6 bg-wood-light text-center relative overflow-hidden -mt-[1px]" style={{
+      boxShadow: 'inset 0 80px 100px -50px rgba(0, 0, 0, 0.35), inset 0 -80px 100px -50px rgba(0, 0, 0, 0.35)'
+    }}>
       <FlowerDecoration />
       <motion.div
         initial={{ opacity: 0, y: 30 }}
@@ -84,7 +87,7 @@ END:VCALENDAR`;
         viewport={{ once: true, amount: 0.3 }}
         className="max-w-2xl mx-auto space-y-8"
       >
-        <h2 className="font-serif text-3xl text-stone-800">Menghitung Hari</h2>
+        <h2 className="font-handwriting-elegant text-3xl text-stone-800">Menghitung Hari</h2>
         <p className="text-stone-500 italic">Menuju hari bahagia kami:</p>
 
         <div className="flex flex-wrap justify-center gap-4 md:gap-8">

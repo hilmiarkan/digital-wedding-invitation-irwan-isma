@@ -1,20 +1,27 @@
 
 import { motion } from "motion/react";
+import { FlowerDecoration } from "./FlowerDecoration";
 import FlowerDecoration2 from "./FlowerDecoration2";
+import gunungan from '../../media/gunungan.png';
 
 export function CoupleInfo() {
   return (
-    <section className="py-24 px-4 bg-stone-50 overflow-hidden relative">
-      <FlowerDecoration2 className="z-[5]" />
+    <section className="py-24 px-4 bg-wood-light overflow-hidden relative -mt-[1px]" style={{
+      boxShadow: 'inset 0 80px 100px -50px rgba(0, 0, 0, 0.35), inset 0 -80px 100px -50px rgba(0, 0, 0, 0.35)'
+    }}>
+      {/* <FlowerDecoration /> */}
+      <FlowerDecoration2 className="z-[15]" />
 
       <div className="max-w-4xl mx-auto relative z-10">
+      
         <div className="text-center mb-16 space-y-6">
+          <img src={gunungan} alt="Gunungan" className="w-16 mx-auto" />
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.2 }}
               viewport={{ once: true }}
-              className="font-serif text-2xl text-stone-600 mb-4"
+              className="font-handwriting-elegant text-2xl text-stone-600 mb-4"
             >
               Bismillahirrahmanirrahim
             </motion.div>
@@ -48,7 +55,7 @@ export function CoupleInfo() {
                 className="flex flex-col items-center text-center space-y-4 w-full md:flex-1 md:max-w-xs"
             >
                 <div className="w-full">
-                    <h3 className="font-serif text-2xl md:text-3xl text-stone-800 font-bold mb-2">Isma Harika Nurrohmah</h3>
+                    <h3 className="font-handwriting-elegant text-2xl md:text-3xl text-stone-800 font-bold mb-2">Isma Harika Nurrohmah</h3>
                     <div className="w-12 h-1 bg-amber-200 mx-auto mb-3" />
                     <p className="text-stone-600">Putri dari Bpk. Suwadi</p>
                     <p className="text-stone-600">& Ibu Sugiati</p>
@@ -75,7 +82,7 @@ export function CoupleInfo() {
                 className="flex flex-col items-center text-center space-y-4 w-full md:flex-1 md:max-w-xs"
             >
                 <div className="w-full">
-                    <h3 className="font-serif text-2xl md:text-3xl text-stone-800 font-bold mb-2">Irwansyah</h3>
+                    <h3 className="font-handwriting-elegant text-2xl md:text-3xl text-stone-800 font-bold mb-2">Irwansyah</h3>
                     <div className="w-12 h-1 bg-amber-200 mx-auto mb-3" />
                     <p className="text-stone-600">Putra dari Bpk. Ibrahim Z</p>
                     <p className="text-stone-600">& Ibu Siti Hajar</p>

@@ -82,9 +82,9 @@ export function SplashCover({ guestName, onOpen, onStartOpening }: SplashCoverPr
 
             <div className="relative z-10">
                 <p className="font-serif text-stone-500 italic mb-3 tracking-widest text-sm">Pernikahan</p>
-                <h1 className="font-serif text-4xl text-stone-800 font-bold mb-2">Isma</h1>
+                <h1 className="font-handwriting-elegant text-4xl text-stone-800 font-bold mb-2">Isma</h1>
                 <p className="font-serif text-xl text-amber-600 mb-2">dan</p>
-                <h1 className="font-serif text-4xl text-stone-800 font-bold mb-6">Irwansyah</h1>
+                <h1 className="font-handwriting-elegant text-4xl text-stone-800 font-bold mb-6">Irwansyah</h1>
                 
                 <div className="w-full h-px bg-gradient-to-r from-transparent via-stone-300 to-transparent my-6" />
 

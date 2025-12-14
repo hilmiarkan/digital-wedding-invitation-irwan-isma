@@ -2,21 +2,25 @@
 import { motion } from "motion/react";
 import { MapPin, Clock, Calendar } from "lucide-react";
 import { FlowerDecoration } from "./FlowerDecoration";
+import gunungan from '../../media/gunungan.png';
 
 export function EventDetails() {
   return (
-    <section className="py-20 px-4 bg-white relative overflow-hidden">
+    <section className="py-20 px-4 bg-wood-light relative overflow-hidden -mt-[1px]" style={{
+      boxShadow: 'inset 0 80px 100px -50px rgba(0, 0, 0, 0.35), inset 0 -80px 100px -50px rgba(0, 0, 0, 0.35)'
+    }}>
       <FlowerDecoration />
       <div className="max-w-4xl mx-auto space-y-16">
         
         {/* Akad Nikah Section */}
         <div className="text-center space-y-8">
+            <img src={gunungan} alt="Gunungan" className="w-16 mx-auto" />
             <motion.h2 
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1.2 }}
                 viewport={{ once: true }}
-                className="font-serif text-3xl text-stone-800"
+                className="font-handwriting-elegant text-3xl text-stone-800"
             >
                 Akad Nikah
             </motion.h2>
@@ -71,7 +75,8 @@ export function EventDetails() {
                 className="text-center max-w-2xl mx-auto space-y-4"
              >
                 <div className="w-full h-px bg-stone-200 my-8" />
-                <h3 className="font-serif text-xl font-bold text-stone-600">Assalamualaikum Warahmatullahi Wabarakatuh</h3>
+                <img src={gunungan} alt="Gunungan" className="w-16 mx-auto" />
+                <h3 className="font-handwriting-elegant text-xl font-bold text-stone-600">Assalamualaikum Warahmatullahi Wabarakatuh</h3>
                 <p className="text-stone-600 leading-relaxed">
                     Dengan segala kerendahan hati dan dengan ungkapan syukur atas karunia Allah SWT, kami mengundang Bapak/Ibu/Saudara/i untuk menghadiri acara resepsi pernikahan putra putri kami yang akan diselenggarakan pada:
                 </p>
@@ -87,7 +92,7 @@ export function EventDetails() {
             >
                 <div className="absolute top-0 left-0 -mt-4 -ml-4 w-24 h-24 bg-amber-50 rounded-full opacity-50 blur-xl" />
                 
-                <h3 className="font-serif text-3xl text-amber-800 mb-6 font-bold">Resepsi</h3>
+                <h3 className="font-handwriting-elegant text-3xl text-amber-800 mb-6 font-bold">Resepsi</h3>
                 
                 <div className="space-y-6 text-stone-600">
                     <div className="flex flex-col items-center gap-2">
@@ -150,7 +155,7 @@ export function EventDetails() {
                 <p className="text-stone-600 font-medium">
                     Atas kehadiran dan doa restunya kami ucapkan terimakasih.
                 </p>
-                <h3 className="font-serif text-xl font-bold text-stone-600 mt-4">Wassalamualaikum Warahmatullahi Wabarakatuh</h3>
+                <h3 className="font-handwriting-elegant text-xl font-bold text-stone-600 mt-4">Wassalamualaikum Warahmatullahi Wabarakatuh</h3>
             </motion.div>
         </div>
       </div>

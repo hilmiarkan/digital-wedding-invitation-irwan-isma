@@ -6,7 +6,9 @@ import gunungan from "../../media/gunungan.png";
 
 export function Header() {
   return (
-    <section className="relative h-screen w-full overflow-hidden bg-stone-100 flex items-center justify-center">
+    <section className="relative h-screen w-full overflow-hidden bg-stone-100 flex items-center justify-center" style={{
+      boxShadow: 'inset 0 -80px 100px -50px rgba(0, 0, 0, 0.35)'
+    }}>
       
       {/* Parallax Background Image - Mount Bromo Scenery */}
       <motion.div 
@@ -53,7 +55,7 @@ export function Header() {
           initial={{ scale: 0.9, opacity: 0 }}
           whileInView={{ scale: 1, opacity: 1 }}
           transition={{ duration: 1.5, delay: 0.2 }}
-          className="font-serif text-5xl md:text-7xl lg:text-8xl drop-shadow-lg"
+          className="font-handwriting-elegant text-5xl md:text-7xl lg:text-8xl drop-shadow-lg"
         >
           Isma <br /> <span className="text-3xl md:text-5xl font-sans font-light">&</span> Irwansyah
         </motion.h1>
@@ -75,7 +77,9 @@ export function Header() {
           transition={{ duration: 2, repeat: Infinity, delay: 1 }}
           className="absolute bottom-10 left-1/2 -translate-x-1/2"
         >
-          <ChevronDown className="text-white opacity-80" />
+          <div className="pt-16 flex flex-col items-center">
+            <ChevronDown className="text-white opacity-80" />
+          </div>
         </motion.div>
       </div>
     </section>

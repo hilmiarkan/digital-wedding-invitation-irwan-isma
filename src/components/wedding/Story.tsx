@@ -43,7 +43,9 @@ export function Story() {
   ];
 
   return (
-    <section className="py-24 px-4 bg-white overflow-hidden relative">
+    <section className="py-24 px-4 bg-wood-soft overflow-hidden relative -mt-[1px]" style={{
+      boxShadow: 'inset 0 80px 100px -50px rgba(0, 0, 0, 0.35), inset 0 -80px 100px -50px rgba(0, 0, 0, 0.35)'
+    }}>
       <FlowerDecoration2 className="z-[5]" />
       <div className="max-w-2xl mx-auto">
         <motion.div 
@@ -53,7 +55,7 @@ export function Story() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="font-serif text-3xl text-stone-800">Kisah Kami</h2>
+          <h2 className="font-handwriting-elegant text-3xl text-stone-800">Kisah Kami</h2>
           <p className="text-stone-500 text-sm mt-2">Love Story</p>
           <div className="w-20 h-1 bg-amber-200 mx-auto rounded-full mt-4" />
         </motion.div>
@@ -83,7 +85,7 @@ export function Story() {
                     <span className="inline-block px-3 py-1 bg-amber-100 text-amber-800 text-xs font-bold rounded-full mb-3">
                       {item.date}
                     </span>
-                    <h3 className="font-serif text-xl font-bold text-stone-800 mb-2">{item.title}</h3>
+                    <h3 className="font-handwriting-elegant text-xl font-bold text-stone-800 mb-2">{item.title}</h3>
                     <div className="text-stone-600 text-sm leading-relaxed space-y-4">
                         {item.desc.map((paragraph, idx) => (
                             <p key={idx}>{paragraph}</p>

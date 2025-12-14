@@ -21,7 +21,7 @@ export function FlowerDecoration() {
       {/* Top Left */}
       <motion.div 
         animate={swayAnimation}
-        className="absolute -top-12 -left-12 w-40 h-40 md:w-56 md:h-56 mix-blend-multiply opacity-80"
+        className="absolute -top-12 -left-12 w-40 h-40 md:w-56 md:h-56 mix-blend-multiply opacity-100"
         style={{ originX: 0, originY: 0 }}
       >
          <img src={flowerUrl} alt="Flower Decoration" className="w-full h-full object-cover rotate-180" />
@@ -30,7 +30,7 @@ export function FlowerDecoration() {
       {/* Top Right */}
       <motion.div 
         animate={swayAnimation}
-        className="absolute -top-12 -right-12 w-40 h-40 md:w-56 md:h-56 mix-blend-multiply opacity-80"
+        className="absolute -top-12 -right-12 w-40 h-40 md:w-56 md:h-56 mix-blend-multiply opacity-100"
         style={{ originX: 1, originY: 0 }}
       >
          <img src={flowerUrl} alt="Flower Decoration" className="w-full h-full object-cover -rotate-90" />
@@ -39,7 +39,7 @@ export function FlowerDecoration() {
       {/* Bottom Left */}
       <motion.div 
         animate={swayAnimation}
-        className="absolute -bottom-12 -left-12 w-40 h-40 md:w-56 md:h-56 mix-blend-multiply opacity-80"
+        className="absolute -bottom-12 -left-12 w-40 h-40 md:w-56 md:h-56 mix-blend-multiply opacity-100"
         style={{ originX: 0, originY: 1 }}
       >
          <img src={flowerUrl} alt="Flower Decoration" className="w-full h-full object-cover rotate-90" />
@@ -48,7 +48,7 @@ export function FlowerDecoration() {
       {/* Bottom Right */}
       <motion.div 
         animate={swayAnimation}
-        className="absolute -bottom-12 -right-12 w-40 h-40 md:w-56 md:h-56 mix-blend-multiply opacity-80"
+        className="absolute -bottom-12 -right-12 w-40 h-40 md:w-56 md:h-56 mix-blend-multiply opacity-100"
         style={{ originX: 1, originY: 1 }}
       >
          <img src={flowerUrl} alt="Flower Decoration" className="w-full h-full object-cover" />
