@@ -87,8 +87,18 @@ export function Footer() {
             </motion.p>
         </div>
 
-        <div className="pt-8 text-[10px] text-stone-600">
-            <p>Dibuat dengan ☕ oleh @arknmaulana</p>
+        <div className="pt-8 text-[8px] text-stone-600">
+            <p>
+              Dibuat dengan ☕ oleh{" "}
+              <a
+                href="https://instagram.com/arknmaulana"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-stone-400 hover:text-amber-200 transition-colors underline underline-offset-2"
+              >
+                @arknmaulana
+              </a>
+            </p>
         </div>
       </motion.div>
     </footer>

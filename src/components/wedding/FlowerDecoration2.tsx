@@ -1,5 +1,4 @@
-import { motion } from "motion/react";
-import { memo, useMemo } from "react";
+import React, { memo, useEffect, useMemo, useRef, useState } from "react";
 import type { CSSProperties } from "react";
 
 // import semua layer
@@ -17,69 +16,32 @@ import layer11 from '../../media/flowey/11.webp';
 
 type FlowerDecoration2Props = {
   className?: string;
+  /** If false, render decoration fully visible with no animations (useful for Header). */
+  animate?: boolean;
 };
 
-// Memoized layer component untuk mencegah re-render yang tidak perlu
-const FlowerLayer = memo(({ 
-  src, 
-  index, 
-  delay, 
-  amplitude, 
-  duration 
-}: { 
-  src: string; 
-  index: number; 
-  delay: number; 
-  amplitude: number; 
+type AnimatedLayer = {
+  src: string;
+  delay: number;
+  amplitude: number;
   duration: number;
-}) => (
-  <motion.img
-    src={src}
-    alt={`flower layer ${index + 1}`}
-    className="absolute inset-0 w-full h-full object-cover"
-    style={{
-      // Simplified shadow untuk performa lebih baik
-      filter: 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1))',
-      // GPU acceleration hints
-      willChange: 'transform',
-      transform: 'translateZ(0)', // Force GPU acceleration
-      backfaceVisibility: 'hidden',
-    }}
-    initial={{ opacity: 0 }}
-    animate={{
-      opacity: 1,
-      y: 0,
-      x: [
-        0,
-        amplitude,
-        -amplitude,
-        amplitude,
-        0,
-      ],
-    }}
-    transition={{
-      opacity: {
-        duration: 1.5,
-        delay: delay,
-        ease: "easeOut",
-      },
-      x: {
-        duration: duration,
-        delay: delay + 1.5,
-        repeat: Infinity,
-        repeatType: "reverse",
-        ease: "easeInOut",
-      },
-    }}
-  />
-));
-
-FlowerLayer.displayName = 'FlowerLayer';
+};
 
 // Memoized component untuk render layered flower di satu corner
-const FlowerLayered = memo(({ transformClass, transformStyle }: { transformClass?: string; transformStyle?: CSSProperties }) => {
-  // Memoize layers array untuk mencegah re-creation
-  const layers = useMemo(() => [
+const FlowerLayered = memo(({ 
+  transformClass, 
+  transformStyle, 
+  isActive,
+  isStatic,
+}: { 
+  transformClass?: string; 
+  transformStyle?: CSSProperties; 
+  isActive: boolean;
+  isStatic: boolean;
+}) => {
+  // Always keep full look: 11 layers. We optimize by using CSS keyframes (compositor)
+  // instead of JS-driven animations for smoother performance on Android.
+  const layers: AnimatedLayer[] = useMemo(() => [
     { src: layer1, delay: 0, amplitude: 3, duration: 4 },
     { src: layer2, delay: 0.1, amplitude: 4, duration: 4.5 },
     { src: layer3, delay: 0.2, amplitude: 5, duration: 5 },
@@ -105,13 +67,24 @@ const FlowerLayered = memo(({ transformClass, transformStyle }: { transformClass
       }}
     >
       {layers.map((layer, index) => (
-        <FlowerLayer
+        <img
           key={index}
           src={layer.src}
-          index={index}
-          delay={layer.delay}
-          amplitude={layer.amplitude}
-          duration={layer.duration}
+          alt=""
+          aria-hidden="true"
+          className={`flower-layer absolute inset-0 w-full h-full object-cover ${
+            isStatic ? "is-static" : (isActive ? "is-active" : "")
+          }`}
+          style={
+            {
+              // Drive keyframes with CSS variables (compositor-friendly)
+              ["--flower-delay" as any]: `${layer.delay}s`,
+              ["--flower-amp" as any]: `${layer.amplitude}px`,
+              ["--flower-dur" as any]: `${layer.duration}s`,
+            } as React.CSSProperties
+          }
+          loading="lazy"
+          decoding="async"
         />
       ))}
     </div>
@@ -120,7 +93,45 @@ const FlowerLayered = memo(({ transformClass, transformStyle }: { transformClass
 
 FlowerLayered.displayName = 'FlowerLayered';
 
-function FlowerDecoration2({ className }: FlowerDecoration2Props) {
+export function FlowerDecoration2Base({ className, animate = true }: FlowerDecoration2Props) {
+  // Defer heavy animations until after the user opens the invitation (splashOpened).
+  const rootRef = useRef<HTMLDivElement | null>(null);
+  const [hasOpened, setHasOpened] = useState(false);
+  // Default to true so decoration is visible/ready immediately (no initial delay waiting for IO callback).
+  const [isInView, setIsInView] = useState(true);
+
+  useEffect(() => {
+    const handleSplashOpened = () => {
+      // Start animations on next frame to avoid competing with the door animation.
+      requestAnimationFrame(() => setHasOpened(true));
+    };
+    window.addEventListener("splashOpened", handleSplashOpened);
+    return () => window.removeEventListener("splashOpened", handleSplashOpened);
+  }, []);
+
+  // Only animate when the section is near viewport (huge perf win on long pages).
+  useEffect(() => {
+    const el = rootRef.current;
+    if (!el || !("IntersectionObserver" in window)) {
+      setIsInView(true);
+      return;
+    }
+    // Ensure we don't hide everything while waiting for the first observer callback.
+    setIsInView(true);
+    const obs = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        setIsInView(Boolean(entry?.isIntersecting));
+      },
+      // Large margin so animations start earlier (feels instant on open)
+      { root: null, rootMargin: "800px 0px 800px 0px", threshold: 0.01 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
+  const isStatic = !animate;
+  const isActive = animate && hasOpened && isInView;
 
   // Extract opacity from className if provided, otherwise default to 100% (fully visible)
   const opacityMatch = className?.match(/opacity-(\d+)/);
@@ -133,77 +144,73 @@ function FlowerDecoration2({ className }: FlowerDecoration2Props) {
 
   return (
     <div 
+      ref={rootRef}
       className={`absolute inset-0 pointer-events-none overflow-visible ${otherClasses}`}
+      aria-hidden="true"
       style={{
         // Optimize container rendering but allow overflow
         contain: 'layout style',
-        willChange: 'contents',
+        // Avoid 'contents' here; it can trigger extra work in some browsers
+        willChange: 'transform',
         // Ensure images can overflow
         clipPath: 'none',
       }}
     >
       {/* Top Left - flip horizontal */}
-      <motion.div 
+      <div
         className="absolute -top-6 -left-12 w-64 h-64 md:w-80 md:h-80 overflow-visible"
         style={{ 
-          originX: 0, 
-          originY: 0, 
           ...opacityStyle,
           willChange: 'transform',
           transform: 'translateZ(0)',
           clipPath: 'none',
         }}
       >
-        <FlowerLayered transformStyle={{ transform: 'scaleX(-1) translateZ(0)' }} />
-      </motion.div>
+        <FlowerLayered isStatic={isStatic} isActive={isActive} transformStyle={{ transform: 'scaleX(-1) translateZ(0)' }} />
+      </div>
 
       {/* Top Right - normal */}
-      <motion.div 
+      <div
         className="absolute -top-6 -right-12 w-64 h-64 md:w-80 md:h-80 overflow-visible"
         style={{ 
-          originX: 1, 
-          originY: 0, 
           ...opacityStyle,
           willChange: 'transform',
           transform: 'translateZ(0)',
           clipPath: 'none',
         }}
       >
-        <FlowerLayered />
-      </motion.div>
+        <FlowerLayered isStatic={isStatic} isActive={isActive} />
+      </div>
 
       {/* Bottom Left - flip horizontal and vertical */}
-      <motion.div 
+      <div
         className="absolute -bottom-12 -left-12 w-64 h-64 md:w-80 md:h-80 overflow-visible"
         style={{ 
-          originX: 0, 
-          originY: 1, 
           ...opacityStyle,
           willChange: 'transform',
           transform: 'translateZ(0)',
           clipPath: 'none',
         }}
       >
-        <FlowerLayered transformStyle={{ transform: 'scaleX(-1) scaleY(-1) translateZ(0)' }} />
-      </motion.div>
+        <FlowerLayered isStatic={isStatic} isActive={isActive} transformStyle={{ transform: 'scaleX(-1) scaleY(-1) translateZ(0)' }} />
+      </div>
 
       {/* Bottom Right - flip vertical */}
-      <motion.div 
+      <div
         className="absolute -bottom-12 -right-12 w-64 h-64 md:w-80 md:h-80 overflow-visible"
         style={{ 
-          originX: 1, 
-          originY: 1, 
           ...opacityStyle,
           willChange: 'transform',
           transform: 'translateZ(0)',
           clipPath: 'none',
         }}
       >
-        <FlowerLayered transformStyle={{ transform: 'scaleY(-1) translateZ(0)' }} />
-      </motion.div>
+        <FlowerLayered isStatic={isStatic} isActive={isActive} transformStyle={{ transform: 'scaleY(-1) translateZ(0)' }} />
+      </div>
     </div>
   );
 }
 
 // Memoize component utama untuk mencegah re-render yang tidak perlu
-export default memo(FlowerDecoration2);
+const FlowerDecoration2 = memo(FlowerDecoration2Base);
+export default FlowerDecoration2;

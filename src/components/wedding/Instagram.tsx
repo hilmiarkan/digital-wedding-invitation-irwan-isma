@@ -25,7 +25,7 @@ export function Instagram() {
           <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-12">
             {/* Isma Instagram */}
             <motion.a
-              href="https://www.instagram.com/isma.harika?utm_source=qr&igsh=MWZ5cWNtbnVxMWc0aQ=="
+              href="https://www.instagram.com/isma.harika"
               target="_blank"
               rel="noopener noreferrer"
               initial={{ opacity: 0, y: 20 }}
@@ -44,7 +44,7 @@ export function Instagram() {
 
             {/* Irwansyah Instagram */}
             <motion.a
-              href="https://www.instagram.com/ketan_hitam36?igsh=MXJva3ZqZDh1anRiYg=="
+              href="https://www.instagram.com/ketan_hitam36"
               target="_blank"
               rel="noopener noreferrer"
               initial={{ opacity: 0, y: 20 }}

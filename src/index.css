@@ -2281,3 +2281,89 @@ html {
   background-size: 700px 700px;
   background-attachment: fixed;
 }
+
+/* Mobile performance: avoid white flicker/jank from fixed backgrounds + blend/transform layers */
+@media (hover: none) and (pointer: coarse) {
+  .bg-wood-light,
+  .bg-wood-soft {
+    background-attachment: scroll;
+  }
+
+  /* Keep header layout identical, but stabilize GPU composition */
+  .wedding-header {
+    background-color: #0c0a09; /* stone-950-ish fallback to prevent white flash while image loads */
+  }
+
+  .wedding-header-bg,
+  .wedding-header-bg img {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+
+  /* Blend modes can be glitchy on some Android GPUs */
+  .wedding-header .mix-blend-multiply {
+    mix-blend-mode: normal;
+  }
+
+  .wedding-header-pattern {
+    background-repeat: repeat;
+    background-size: 600px 600px;
+  }
+}
+
+/* FlowerDecoration2: compositor-friendly animation (transform + opacity only).
+   We keep the same layered look, but avoid JS-driven per-layer animation for smoother Android perf. */
+.flower-layer {
+  opacity: 0;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  will-change: transform, opacity;
+}
+
+.flower-layer.is-static {
+  opacity: 1;
+  animation: none !important;
+}
+
+.flower-layer.is-active {
+  animation:
+    flowerFadeIn 0.45s ease-out var(--flower-delay, 0s) both,
+    flowerSway var(--flower-dur, 4s) ease-in-out calc(var(--flower-delay, 0s) + 0.45s) infinite alternate;
+}
+
+@keyframes flowerFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes flowerSway {
+  0%   { transform: translate3d(0, 0, 0); }
+  50%  { transform: translate3d(var(--flower-amp, 4px), 0, 0); }
+  100% { transform: translate3d(calc(var(--flower-amp, 4px) * -1), 0, 0); }
+}
+
+/* FlowerDecoration (batik corners): compositor-friendly rotation sway */
+.flower-decoration-item {
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  will-change: transform;
+}
+
+.flower-decoration-item.is-active {
+  animation: flowerRotateSway 8s ease-in-out infinite;
+}
+
+@keyframes flowerRotateSway {
+  0% { transform: translate3d(0, 0, 0) rotate(-3deg); }
+  50% { transform: translate3d(0, 0, 0) rotate(3deg); }
+  100% { transform: translate3d(0, 0, 0) rotate(-3deg); }
+}
+
+/* Pause decorative animations during scroll to keep FPS high on Android */
+.is-scrolling .flower-layer.is-active,
+.is-scrolling .flower-decoration-item.is-active {
+  animation-play-state: paused;
+}

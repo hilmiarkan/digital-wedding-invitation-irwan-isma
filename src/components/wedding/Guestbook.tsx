@@ -69,7 +69,8 @@ export function Guestbook({ slug, isInvitedGuest = false }: GuestbookProps) {
       });
       
       toast.success("Ucapan berhasil dikirim!");
-      setForm({ name: "", attendance: "hadir", message: "" });
+      // Keep name after submit (user may want to send another message)
+      setForm((prev) => ({ name: prev.name, attendance: "hadir", message: "" }));
     } catch (error) {
       console.error("Error submitting comment:", error);
       toast.error("Gagal mengirim ucapan. Silakan coba lagi.");
@@ -107,12 +108,11 @@ export function Guestbook({ slug, isInvitedGuest = false }: GuestbookProps) {
                 <input 
                   type="text" 
                   value={form.name}
-                  readOnly
-                  disabled
-                  className="w-full px-4 py-2 rounded-lg border border-stone-200 bg-stone-50 text-stone-600 cursor-not-allowed"
-                  placeholder="Nama akan terisi otomatis"
+                  onChange={(e) => setForm({ ...form, name: e.target.value })}
+                  className="w-full px-4 py-2 rounded-lg border border-stone-200 bg-white text-stone-800 focus:outline-none focus:ring-2 focus:ring-amber-200 transition"
+                  placeholder="Masukkan nama"
                 />
-                <p className="text-xs text-stone-500">Nama diisi otomatis berdasarkan undangan Anda</p>
+                <p className="text-xs text-stone-500">Nama terisi otomatis dari undangan, tapi bisa kamu ubah.</p>
               </div>
 
               <div className="space-y-2">

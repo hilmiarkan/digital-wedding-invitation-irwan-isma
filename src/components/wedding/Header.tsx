@@ -3,31 +3,68 @@ import { motion } from "motion/react";
 import { ChevronDown } from "lucide-react";
 import FlowerDecoration2 from "./FlowerDecoration2";
 import gunungan from "../../media/gunungan.webp";
+import bg from "../../media/gunung.webp";
+import React, { useEffect, useState } from "react";
 
 export function Header() {
+  // On Android (especially low/mid devices), continuous transform animations + blend modes
+  // on full-screen backgrounds can cause white flicker during scrolling/repaint.
+  // Keep layout identical, but disable the expensive parts for coarse-pointer/mobile or reduced-motion.
+  const [isMotionSafe, setIsMotionSafe] = useState(true);
+
+  useEffect(() => {
+    const mqReduce = window.matchMedia?.("(prefers-reduced-motion: reduce)");
+    const mqCoarse = window.matchMedia?.("(hover: none) and (pointer: coarse)");
+
+    const update = () => {
+      const reduce = mqReduce?.matches ?? false;
+      const coarse = mqCoarse?.matches ?? false;
+      setIsMotionSafe(!(reduce || coarse));
+    };
+
+    update();
+    mqReduce?.addEventListener?.("change", update);
+    mqCoarse?.addEventListener?.("change", update);
+    return () => {
+      mqReduce?.removeEventListener?.("change", update);
+      mqCoarse?.removeEventListener?.("change", update);
+    };
+  }, []);
+
   return (
-    <section className="relative h-screen w-full overflow-hidden bg-stone-100 flex items-center justify-center" style={{
+    <section className="wedding-header relative h-screen w-full overflow-hidden bg-stone-100 flex items-center justify-center" style={{
       boxShadow: 'inset 0 -80px 100px -50px rgba(0, 0, 0, 0.35)'
     }}>
       
       {/* Parallax Background Image - Mount Bromo Scenery */}
       <motion.div 
-        className="absolute inset-0 z-0"
-        initial={{ scale: 1.1 }}
+        className="wedding-header-bg absolute inset-0 z-0 bg-stone-900"
+        initial={{ scale: isMotionSafe ? 1.1 : 1 }}
         animate={{ scale: 1 }}
-        transition={{ duration: 10, repeat: Infinity, repeatType: "reverse" }}
+        transition={
+          isMotionSafe
+            // One-time subtle ken-burns (no infinite zoom in/out) to reduce GPU load on Android
+            ? { duration: 6, ease: [0.22, 1, 0.36, 1] }
+            : { duration: 0 }
+        }
       >
-        <div className="absolute inset-0 bg-stone-900/30 z-15 mix-blend-multiply" />
+        <div className={`absolute inset-0 bg-stone-900/30 z-15 ${isMotionSafe ? "mix-blend-multiply" : ""}`} />
         <img 
-          src="https://images.unsplash.com/photo-1722661671972-89e5e2fb532a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080" 
+          src={bg} 
           alt="Javanese Scenery" 
           className="h-full w-full object-cover object-center"
+          loading="eager"
+          decoding="async"
+          fetchPriority="high"
         />
-        <FlowerDecoration2 className="z-[15]" />
+        <FlowerDecoration2 className="z-[15]" animate={false} />
       </motion.div>
 
       {/* Decorative Overlay Pattern (Batik Motif subtle) */}
-      <div className="absolute inset-0 z-10 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/batik.webp')]" />
+      {/* <div
+        className="wedding-header-pattern absolute inset-0 z-10 opacity-10"
+        style={{ backgroundImage: `url(${batik})` }}
+      /> */}
 
       {/* Content */}
       <div className="relative z-20 text-center text-white space-y-6 px-4">
@@ -73,8 +110,8 @@ export function Header() {
 
         <motion.div
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1, y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity, delay: 1 }}
+          animate={isMotionSafe ? { opacity: 1, y: [0, 10, 0] } : { opacity: 1 }}
+          transition={isMotionSafe ? { duration: 2, repeat: Infinity, delay: 1 } : { duration: 0 }}
           className="absolute bottom-10 left-1/2 -translate-x-1/2"
         >
           <div className="pt-16 flex flex-col items-center">
